@@ -1,0 +1,49 @@
+# GitHub Actions workflow for running Pylint on Python files.
+
+# Copyright 2024 Qi Tianshi. All rights reserved.
+
+
+name: Pylint
+
+on:
+  push:
+    paths:
+      - '**.py'
+  pull_request:
+    branches:
+      - main
+  workflow_dispatch:
+
+jobs:
+  lint:
+
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout
+      uses: actions/checkout@v4
+
+    - name: Set up Python
+      uses: actions/setup-python@v5
+      with:
+        python-version: '3.10'
+
+    - name: Retrieve pip cache
+      id: cache-pip
+      uses: actions/cache@v4
+      with:
+        path: ~/.cache/pip
+        key: ${{ runner.os }}-pip-${{ hashFiles('**/requirements.txt') }}
+        restore-keys: |
+          ${{ runner.os }}-pip-
+
+    - name: Install pip dependencies
+      if: steps.cache-pip.outputs.cache-hit != 'true'
+      run: |
+        python3 -m pip install --upgrade pip
+        pip install -r requirements.txt
+
+    - name: Run pylint
+      run: |
+        pip install pylint
+        pylint --errors-only $(git ls-files '*.py')

@@ -1,0 +1,6 @@
+# .gitattributes
+
+# Copyright 2024 Qi Tianshi. All rights reserved.
+
+
+* text=auto eol=lf
