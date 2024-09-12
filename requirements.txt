@@ -1,0 +1,6 @@
+# requirements.txt
+
+# Copyright 2024 Qi Tianshi. All rights reserved.
+
+
+python-telegram-bot==21.4.0
