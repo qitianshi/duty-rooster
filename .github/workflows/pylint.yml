@@ -20,30 +20,20 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-    - name: Checkout
-      uses: actions/checkout@v4
 
-    - name: Set up Python
-      uses: actions/setup-python@v5
-      with:
-        python-version: '3.10'
+      - name: Checkout
+        uses: actions/checkout@v4
 
-    - name: Retrieve pip cache
-      id: cache-pip
-      uses: actions/cache@v4
-      with:
-        path: ~/.cache/pip
-        key: ${{ runner.os }}-pip-${{ hashFiles('**/requirements.txt') }}
-        restore-keys: |
-          ${{ runner.os }}-pip-
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.10'
+          cache: 'pip'
 
-    - name: Install pip dependencies
-      if: steps.cache-pip.outputs.cache-hit != 'true'
-      run: |
-        python3 -m pip install --upgrade pip
-        pip install -r requirements.txt
+      - name: Install pip dependencies
+        run: |
+          pip install -r requirements.txt
+          pip install pylint
 
-    - name: Run pylint
-      run: |
-        pip install pylint
-        pylint --errors-only $(git ls-files '*.py')
+      - name: Run Pylint
+        run: pylint --errors-only $(git ls-files '*.py')
