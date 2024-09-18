@@ -3,6 +3,11 @@
 # Copyright 2024 Qi Tianshi. All rights reserved.
 
 
+# ----------- Miscellaneous ------------
+
+# Credentials from google-github-actions/auth
+gha-creds-*.json
+
 # ------------ Python stuff ------------
 # From github/gitignore
 
