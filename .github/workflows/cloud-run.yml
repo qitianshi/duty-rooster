@@ -51,6 +51,8 @@ jobs:
           tags: ${{ env.DOCKER_TAG }}
           load: true
           outputs: type=docker,dest=/tmp/duty-rooster-image.tar
+          cache-from: type=gha
+          cache-to: type=gha,mode=max
 
       # Uploads artifact for use in deploy job.
       - name: Upload Docker image artifact
