@@ -15,6 +15,7 @@ on:
     paths:
       - 'src/**'
       - 'core/**'
+      - '.dockerignore'
       - '.github/workflows/cloud-run.yml'
       - '.gitignore'
       - '.gitmodules'
