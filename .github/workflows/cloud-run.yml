@@ -110,10 +110,9 @@ jobs:
 
       # Pushes the Docker image from the build job to Artifact Registry.
       - name: Push Docker image
-        uses: docker/build-push-action@v6
-        with:
-          push: true
-          tags: ${{ env.DOCKER_TAG }}
+        run: |
+          docker load --input /tmp/duty-rooster-image.tar
+          docker push ${{ env.DOCKER_TAG }}
 
       # Deploys the image from Artifact Registry to Cloud Run.
       - name: Deploy to Cloud Run
