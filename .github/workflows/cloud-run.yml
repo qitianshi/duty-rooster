@@ -9,18 +9,9 @@ name: Build and Deploy
 on:
 
   # Deployment
-  push:
-    branches:
-      - 'main'
-    paths:
-      - 'src/**'
-      - 'core/**'
-      - '.dockerignore'
-      - '.github/workflows/cloud-run.yml'
-      - '.gitignore'
-      - '.gitmodules'
-      - 'Dockerfile'
-      - 'requirements.txt'
+  release:
+    types:
+      - published
 
   # Test-builds PRs without deploying.
   pull_request:
@@ -35,12 +26,14 @@ on:
 
 env:
 
-  # Tag for the Docker image.
+  # Tag for the Docker image. If the workflow was triggered by a release, the
+  # image tag matches the release tag. Otherwise, the SHA of the current
+  # commit is used.
   DOCKER_TAG: "${{ vars.GCP_REGION }}-docker.pkg.dev\
     /${{ vars.GCP_PROJECT_ID }}\
     /${{ vars.GCP_GAR_REPO }}\
     /${{ vars.GCP_GCR_SERVICE }}\
-    :${{ github.sha }}"
+    :${{ github.event_name == 'release' && github.event.release.tag_name || github.sha }}"
 
 jobs:
 
