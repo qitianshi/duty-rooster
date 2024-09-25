@@ -31,11 +31,16 @@ if __name__ == "__main__":
 
     app = ApplicationBuilder().token(os.getenv("PROD_BOT_TOKEN")).build()
 
-    start_handler = CommandHandler('start', start)
-    app.add_handler(start_handler)
+    # Adds handlers.
+    app.add_handler(CommandHandler('start', start))
 
-    app.run_webhook(
-        listen="0.0.0.0",
-        port=int(os.getenv("PORT", "8080")),
-        webhook_url=os.getenv("GCP_APP_ENDPOINT"),
-    )
+    # Uses the appropriate run mode depending on the environment.
+    if os.getenv("ENV") == "production":
+        app.run_webhook(
+            listen="0.0.0.0",
+            port=int(os.getenv("PORT", "8080")),
+            webhook_url=os.getenv("GCP_APP_ENDPOINT"),
+        )
+
+    else:
+        app.run_polling()
