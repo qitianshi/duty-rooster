@@ -1,4 +1,7 @@
-"""Entry point for Duty Rooster."""
+"""
+Entry point for Duty Rooster. Configures application, webhooks, event handlers,
+logging, etc.
+"""
 
 # Copyright 2024 Qi Tianshi. All rights reserved.
 
@@ -7,8 +10,9 @@ import os
 import logging
 from secrets import token_urlsafe
 
-from telegram import Update
-from telegram.ext import ApplicationBuilder, ContextTypes, CommandHandler
+from telegram.ext import ApplicationBuilder, CommandHandler
+
+import components
 
 
 # Logging configs.
@@ -18,22 +22,18 @@ logging.basicConfig(
 )
 
 
-async def start(update: Update, context: ContextTypes.DEFAULT_TYPE):
-    """Onboarding for new users."""
-
-    await context.bot.send_message(
-        chat_id=update.effective_chat.id,
-        text="Cock-a-doodle-doo! I'm Duty Rooster, the duty roster that isn't"
-            + " bird-brained. Something's hatching soon, so watch this coop!"
-    )
-
-
+# Runs the app.
 if __name__ == "__main__":
 
-    app = ApplicationBuilder().token(os.getenv("PROD_BOT_TOKEN")).build()
+    # Uses the test bot in dev, and the production bot in prod.
+    app = ApplicationBuilder().token(
+        os.getenv("PROD_BOT_TOKEN")
+        if os.getenv("ENV") == "production"
+        else os.getenv("TEST_BOT_TOKEN")
+    ).build()
 
     # Adds handlers.
-    app.add_handler(CommandHandler('start', start))
+    app.add_handler(CommandHandler('start', components.onboarding.callback))
 
     # Uses the appropriate run mode depending on the environment.
     if os.getenv("ENV") == "production":
