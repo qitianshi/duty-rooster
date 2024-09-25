@@ -5,6 +5,7 @@
 
 import os
 import logging
+from secrets import token_urlsafe
 
 from telegram import Update
 from telegram.ext import ApplicationBuilder, ContextTypes, CommandHandler
@@ -40,6 +41,7 @@ if __name__ == "__main__":
             listen="0.0.0.0",
             port=int(os.getenv("PORT", "8080")),
             webhook_url=os.getenv("GCP_APP_ENDPOINT"),
+            secret_token=token_urlsafe(32),
         )
 
     else:
