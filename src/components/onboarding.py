@@ -11,7 +11,7 @@ from telegram import Update
 from telegram.ext import ContextTypes
 
 
-async def callback(update: Update, context: ContextTypes.DEFAULT_TYPE):
+async def callback(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
     """Update handler callback for `onboarding`."""
 
     # TODO: Placeholder message.
