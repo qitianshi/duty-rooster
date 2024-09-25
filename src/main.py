@@ -29,9 +29,13 @@ async def start(update: Update, context: ContextTypes.DEFAULT_TYPE):
 
 if __name__ == "__main__":
 
-    app = ApplicationBuilder().token(os.getenv("TEST_BOT_TOKEN")).build()
+    app = ApplicationBuilder().token(os.getenv("PROD_BOT_TOKEN")).build()
 
     start_handler = CommandHandler('start', start)
     app.add_handler(start_handler)
 
-    app.run_polling()
+    app.run_webhook(
+        listen="0.0.0.0",
+        port=int(os.getenv("PORT", "8080")),
+        webhook_url=os.getenv("APP_URL"),
+    )
