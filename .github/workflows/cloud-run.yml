@@ -79,7 +79,7 @@ jobs:
 
     # This job is not run if the workflow was triggered by a pull request, or
     # workflow dispatch with `no_deploy` set to `true`.
-    if: ${{ !(github.event_name == 'pull_request' || github.event.inputs.no_deploy) }}
+    if: ${{ !(github.event_name == 'pull_request' || github.event.inputs.no_deploy == 'true') }}
 
     runs-on: ubuntu-latest
 
