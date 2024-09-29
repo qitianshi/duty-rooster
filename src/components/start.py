@@ -1,7 +1,7 @@
 """Onboarding for new users.
 
-Duty Rooster introduces itself and asks for initial signup info. Triggered by
-the `/start` command.
+Duty Rooster introduces itself and runs initial setup. Triggered by the
+`/start` command.
 """
 
 # Copyright 2024 Qi Tianshi. All rights reserved.
@@ -12,7 +12,7 @@ from telegram.ext import ContextTypes
 
 
 async def callback(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
-    """Update handler callback for `onboarding`."""
+    """Update handler callback for `start`."""
 
     # TODO: Placeholder message.
     await context.bot.send_message(

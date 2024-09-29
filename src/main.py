@@ -32,7 +32,7 @@ if __name__ == "__main__":
     ).build()
 
     # Adds handlers.
-    app.add_handler(CommandHandler('start', components.onboarding.callback))
+    app.add_handler(CommandHandler('start', components.start.callback))
 
     # Uses the appropriate run mode depending on the environment. Generates a
     # short-lived token for verifying the authenticity of webhook requests.
