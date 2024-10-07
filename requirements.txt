@@ -3,4 +3,5 @@
 # Copyright 2024 Qi Tianshi. All rights reserved.
 
 
+google-cloud-firestore==2.19.0
 python-telegram-bot[webhooks]==21.4.0
