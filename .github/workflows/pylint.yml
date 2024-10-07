@@ -23,6 +23,9 @@ jobs:
 
       - name: Checkout
         uses: actions/checkout@v4
+        with:
+          submodules: ${{ !(github.event_name == 'pull_request' && (github.actor == 'dependabot[bot]' || github.event.pull_request.head.repo.full_name != github.repository)) }}
+          token: ${{ secrets.DRCORE_GITHUB_TOKEN }}
 
       - name: Set up Python
         uses: actions/setup-python@v5
