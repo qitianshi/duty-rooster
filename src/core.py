@@ -7,10 +7,11 @@ submodule.
 # Copyright 2024 Qi Tianshi. All rights reserved.
 
 
-import sys
 import os
+import sys
 
 # Appends the core submodule to PYTHONPATH.
 sys.path.append(os.path.join(os.path.dirname(__file__), os.pardir, 'core'))
 
+# pylint: disable-next=wildcard-import,wrong-import-position
 from roostercore import *
