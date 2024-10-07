@@ -1,0 +1,7 @@
+; .pylintrc
+
+; Copyright 2024 Qi Tianshi. All rights reserved.
+
+
+[MASTER]
+init-hook="import sys; sys.path.append(./core)"         ; Appends core to PYTHONPATH.
