@@ -8,6 +8,9 @@
 # Credentials from google-github-actions/auth
 gha-creds-*.json
 
+# VS Code configs
+.vscode/
+
 # ------------ Python stuff ------------
 # From github/gitignore
 
