@@ -3,4 +3,4 @@
 # Copyright 2024 Qi Tianshi. All rights reserved.
 
 
-from .start import *
+from . import start
