@@ -4,4 +4,4 @@
 
 
 google-cloud-firestore==2.19.0
-python-telegram-bot[webhooks]==21.4.0
+python-telegram-bot[webhooks]==21.6
