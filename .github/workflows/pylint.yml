@@ -14,6 +14,13 @@ on:
       - main
   workflow_dispatch:
 
+env:
+
+  # Whether the duty-rooster-core submodule should be checked out. For
+  # security, it is not checked out if the workflow was triggered by a pull
+  # pull request created by Dependabot or originating from an external fork.
+  CHECKOUT_CORE: ${{ !(github.event_name == 'pull_request' && (github.actor == 'dependabot[bot]' || github.event.pull_request.head.repo.full_name != github.repository)) }}
+
 jobs:
   lint:
 
@@ -21,11 +28,13 @@ jobs:
 
     steps:
 
+      # Checks out repos. Different tokens are provided depending on whether
+      # submodules are checked out.
       - name: Checkout
         uses: actions/checkout@v4
         with:
-          submodules: ${{ !(github.event_name == 'pull_request' && (github.actor == 'dependabot[bot]' || github.event.pull_request.head.repo.full_name != github.repository)) }}
-          token: ${{ secrets.DRCORE_GITHUB_TOKEN }}
+          submodules: ${{ env.CHECKOUT_CORE }}
+          token: ${{ env.CHECKOUT_CORE && secrets.DRCORE_GITHUB_TOKEN || github.token }}
 
       - name: Set up Python
         uses: actions/setup-python@v5
