@@ -3,20 +3,25 @@
 # Copyright 2024 Qi Tianshi. All rights reserved.
 
 
-# Set up environment
+# Sets up the environment.
 FROM python:3.10-slim
 ENV PORT=8080
 ENV PYTHONDONTWRITEBYTECODE=1
 ENV PYTHONUNBUFFERED=1
 WORKDIR /app
 
-# Python dependencies
-COPY requirements.txt /app
+# Installs Python dependencies.
+COPY requirements.txt /app/
 RUN pip install --no-cache-dir -r requirements.txt
 
-# Copy src
-COPY src/ /app
+# Copies and installs roostercore.
+COPY core/pyproject.toml /app/core/
+COPY core/roostercore/ /app/core/roostercore/
+RUN pip install --no-cache-dir ./core
 
-# Run app
+# Copies src.
+COPY src/ /app/src/
+
+# Runs the server.
 EXPOSE 8080
-CMD ["python", "main.py"]
+CMD ["python", "src/main.py"]
