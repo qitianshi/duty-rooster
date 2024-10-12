@@ -5,3 +5,4 @@
 
 google-cloud-firestore==2.19.0
 python-telegram-bot[webhooks]==21.6
+setuptools==75.1.0
