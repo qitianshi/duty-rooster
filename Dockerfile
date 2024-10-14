@@ -4,7 +4,7 @@
 
 
 # Sets up the environment.
-FROM python:3.10-slim
+FROM python:3.13-slim
 ENV PORT=8080
 ENV PYTHONDONTWRITEBYTECODE=1
 ENV PYTHONUNBUFFERED=1
