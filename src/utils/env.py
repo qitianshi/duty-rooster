@@ -16,7 +16,7 @@ class Environment(Enum):
 
 # See .env.example for environment variable docs.
 ENV: Environment = Environment(getenv("ENV"))
-GCP_APP_ENDPOINT: str = getenv("GCP_APP_ENDPOINT")
+GCP_APP_ENDPOINT: str | None = getenv("GCP_APP_ENDPOINT")
 PORT: int = int(getenv("PORT", "8080"))                     # Set by Docker.
-PROD_BOT_TOKEN: str = getenv("PROD_BOT_TOKEN")
-TEST_BOT_TOKEN: str = getenv("TEST_BOT_TOKEN")
+PROD_BOT_TOKEN: str | None = getenv("PROD_BOT_TOKEN")
+TEST_BOT_TOKEN: str | None = getenv("TEST_BOT_TOKEN")
