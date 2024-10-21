@@ -16,6 +16,7 @@ RUN pip install --no-cache-dir -r requirements.txt
 
 # Copies and installs roostercore.
 COPY core/pyproject.toml /app/core/
+COPY core/docs/database/schemas/ /app/core/docs/database/schemas
 COPY core/roostercore/ /app/core/roostercore/
 RUN pip install --no-cache-dir ./core
 
